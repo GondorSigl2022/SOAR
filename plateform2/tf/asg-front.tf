@@ -6,7 +6,7 @@ resource "aws_launch_configuration" "front" {
 
   security_groups             = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
   associate_public_ip_address = true
-  key_name                    = aws_key_pair.soar-key-pair.id
+  # key_name                    = aws_key_pair.soar-key-pair.id
 
   user_data = file("application-scripts/front.sh")
 
@@ -14,10 +14,10 @@ resource "aws_launch_configuration" "front" {
     create_before_destroy = true
   }
 
-  connection {
-    user        = var.EC2_USER
-    private_key = file("${var.PRIVATE_KEY_PATH}")
-  }
+  # connection {
+  #   user        = var.EC2_USER
+  #   private_key = file("${var.PRIVATE_KEY_PATH}")
+  # }
 }
 
 resource "aws_autoscaling_group" "front" {

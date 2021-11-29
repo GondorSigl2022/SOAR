@@ -11,13 +11,13 @@ variable "AMI" {
 
 }
 
-variable "PUBLIC_KEY_PATH" {
-  default = "~/.ssh/soar-key-pair.pub"
-}
+# variable "PUBLIC_KEY_PATH" {
+#   default = "~/.ssh/soar-key-pair.pub"
+# }
 
-variable "PRIVATE_KEY_PATH" {
-  default = "~/.ssh/soar-key-pair"
-}
+# variable "PRIVATE_KEY_PATH" {
+#   default = "~/.ssh/soar-key-pair"
+# }
 
 variable "EC2_USER" {
   default = "ubuntu"

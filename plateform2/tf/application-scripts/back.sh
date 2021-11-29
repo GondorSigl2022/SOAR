@@ -6,7 +6,7 @@ sudo apt-get install nodejs
 
 git clone git@github.com:GondorSigl2022/backend-SOAR.git
 
-cd backedn-SOAR/backend/
+cd backend-SOAR/backend/
 
 npm install express
 

@@ -57,7 +57,7 @@ resource "aws_elb" "web-elb" {
   listener {
     lb_port           = 80
     lb_protocol       = "http"
-    instance_port     = "80"
+    instance_port     = "5000"
     instance_protocol = "http"
   }
 

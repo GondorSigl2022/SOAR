@@ -8,7 +8,7 @@ resource "aws_launch_configuration" "back" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.soar-key-pair.id
 
-  user_data = file("files/apache-back.sh")
+  user_data = file("application-scripts/back.sh")
 
   lifecycle {
     create_before_destroy = true

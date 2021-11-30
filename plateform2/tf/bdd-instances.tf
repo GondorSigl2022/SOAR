@@ -1,52 +1,47 @@
-# resource "aws_instance" "bdd-master" {
+resource "aws_instance" "bdd-master" {
 
-#   ami           = lookup(var.AMI, var.AWS_REGION)
-#   instance_type = "t2.micro"
+  ami           = lookup(var.AMI, var.AWS_REGION)
+  instance_type = "t2.micro"
 
-#   # VPC
-#   subnet_id = aws_subnet.prod-subnet-public-3.id
+  # VPC
+  subnet_id = aws_subnet.prod-public-subnet-3.id
 
-#   # Security Group
-#   vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+  # Security Group
+  vpc_security_group_ids = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
 
-#   # the Public SSH key
-#   # key_name = aws_key_pair.soar-key-pair.id
+  # the Public SSH key
+  key_name = aws_key_pair.webserver-key.key_name
 
-#   # connection {
-#   #   user        = var.EC2_USER
-#   #   private_key = file("${var.PRIVATE_KEY_PATH}")
-#   # }
+  connection {
+    user        = var.EC2_USER
+    private_key = tls_private_key.webserver-private-key.private_key_pem
+  }
 
-#   tags = {
-#     Name = "bdd-master"
-#   }
-# }
+  tags = {
+    Name = "bdd-master"
+  }
+}
 
-# resource "aws_instance" "bdd-slave" {
+resource "aws_instance" "bdd-slave" {
 
-#   ami           = lookup(var.AMI, var.AWS_REGION)
-#   instance_type = "t2.micro"
+  ami           = lookup(var.AMI, var.AWS_REGION)
+  instance_type = "t2.micro"
 
-#   # VPC
-#   subnet_id = aws_subnet.prod-subnet-public-3.id
+  # VPC
+  subnet_id = aws_subnet.prod-public-subnet-3.id
 
-#   # Security Group
-#   vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+  # Security Group
+  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
 
-#   # the Public SSH key
-#   # key_name = aws_key_pair.soar-key-pair.id
+  # the Public SSH key
+  key_name = aws_key_pair.webserver-key.key_name
 
-#   # connection {
-#   #   user        = var.EC2_USER
-#   #   private_key = file("${var.PRIVATE_KEY_PATH}")
-#   # }
+  connection {
+    user        = var.EC2_USER
+    private_key = tls_private_key.webserver-private-key.private_key_pem
+  }
 
-#   tags = {
-#     Name = "bdd-slave"
-#   }
-# }
-
-# # resource "aws_key_pair" "soar-key-pair" {
-# #   key_name   = "soar-key-pair"
-# #   public_key = file(var.PUBLIC_KEY_PATH)
-# # }
+  tags = {
+    Name = "bdd-slave"
+  }
+}

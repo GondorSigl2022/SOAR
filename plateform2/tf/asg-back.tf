@@ -6,18 +6,18 @@ resource "aws_launch_configuration" "back" {
 
   security_groups             = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
   associate_public_ip_address = true
-  # key_name                    = aws_key_pair.soar-key-pair.id
+  key_name                    = aws_key_pair.webserver-key.key_name
 
-  user_data = file("application-scripts/back.sh")
+  user_data = file("application-scripts/apache.sh")
 
   lifecycle {
     create_before_destroy = true
   }
 
-  # connection {
-  #   user        = var.EC2_USER
-  #   private_key = file("${var.PRIVATE_KEY_PATH}")
-  # }
+  connection {
+    user        = var.EC2_USER
+    private_key = tls_private_key.webserver-private-key.private_key_pem
+  }
 }
 
 resource "aws_autoscaling_group" "back" {

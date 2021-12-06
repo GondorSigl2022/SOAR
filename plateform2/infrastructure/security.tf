@@ -14,7 +14,7 @@ resource "aws_security_group" "ssh-allowed" {
     protocol  = "tcp"
 
     //My Ip adress => TODO : change with a better method
-    cidr_blocks = ["83.202.71.35/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {

@@ -1,3 +1,4 @@
+#! /bin/bash
 
 cd /home/ubuntu/
 
@@ -11,6 +12,6 @@ git clone https://github.com/GondorSigl2022/frontend-SOAR.git
 
 cd frontend-SOAR/frontend/
 
-npm install
+sudo npm install
 
-npm run dev
+sudo PORT=80 npm run start

@@ -6,9 +6,8 @@ variable "AMI" {
   type = map(string)
 
   default = {
-    us-east-2 = "ami-01685d240b8fbbfeb"
+    us-east-2 = "ami-0fb653ca2d3203ac1"
   }
-
 }
 
 # variable "PUBLIC_KEY_PATH" {

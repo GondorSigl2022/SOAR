@@ -1,3 +1,3 @@
 output "elb_dns_name" {
-  value = aws_elb.web-elb.dns_name
+  value = module.alb.lb_dns_name
 }

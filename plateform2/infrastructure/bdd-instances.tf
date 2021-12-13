@@ -1,47 +1,59 @@
-# resource "aws_instance" "bdd-master" {
+resource "aws_instance" "bdd-master" {
 
-#   ami           = lookup(var.AMI, var.AWS_REGION)
-#   instance_type = "t2.micro"
+  ami           = "ami-0d1bf5b68307103c2"
+  instance_type = "t2.micro"
 
-#   # VPC
-#   subnet_id = aws_subnet.prod-public-subnet-3.id
+  # VPC
+  subnet_id = aws_subnet.prod-public-subnet-3.id
 
-#   # Security Group
-#   vpc_security_group_ids = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
+  # Security Group
+  vpc_security_group_ids = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
 
-#   # the Public SSH key
-#   key_name = aws_key_pair.webserver-key.key_name
+  # Specify private ip
+  private_ip = "10.0.3.43"
 
-#   connection {
-#     user        = var.EC2_USER
-#     private_key = tls_private_key.webserver-private-key.private_key_pem
-#   }
+  # The Public SSH key
+  key_name = aws_key_pair.webserver-key.key_name
 
-#   tags = {
-#     Name = "bdd-master"
-#   }
-# }
+  # Installation script
+  user_data = file("application-scripts/postgres.sh")
 
-# resource "aws_instance" "bdd-slave" {
+  connection {
+    user        = var.EC2_USER
+    private_key = tls_private_key.webserver-private-key.private_key_pem
+  }
 
-#   ami           = lookup(var.AMI, var.AWS_REGION)
-#   instance_type = "t2.micro"
+  tags = {
+    Name = "bdd-master"
+  }
+}
 
-#   # VPC
-#   subnet_id = aws_subnet.prod-public-subnet-3.id
+resource "aws_instance" "bdd-slave" {
 
-#   # Security Group
-#   vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+  ami           = "ami-0d1bf5b68307103c2"
+  instance_type = "t2.micro"
 
-#   # the Public SSH key
-#   key_name = aws_key_pair.webserver-key.key_name
+  # VPC
+  subnet_id = aws_subnet.prod-public-subnet-3.id
 
-#   connection {
-#     user        = var.EC2_USER
-#     private_key = tls_private_key.webserver-private-key.private_key_pem
-#   }
+  # Security Group
+  vpc_security_group_ids = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
 
-#   tags = {
-#     Name = "bdd-slave"
-#   }
-# }
+  # Specify private ip
+  private_ip = "10.0.3.54"
+
+  # The Public SSH key
+  key_name = aws_key_pair.webserver-key.key_name
+
+  # Installation script
+  user_data = file("application-scripts/postgres.sh")
+
+  connection {
+    user        = var.EC2_USER
+    private_key = tls_private_key.webserver-private-key.private_key_pem
+  }
+
+  tags = {
+    Name = "bdd-slave"
+  }
+}

@@ -8,7 +8,7 @@
 #   associate_public_ip_address = true
 #   key_name                    = aws_key_pair.webserver-key.key_name
 
-#   user_data = file("application-scripts/apache.sh")
+#   user_data = file("application-scripts/back.sh")
 
 #   lifecycle {
 #     create_before_destroy = true
@@ -28,9 +28,7 @@
 #   max_size         = 4
 
 #   health_check_type = "ELB"
-#   load_balancers = [
-#     aws_elb.web-elb.id
-#   ]
+#   target_group_arns = module.alb.target_group_arns
 
 #   launch_configuration = aws_launch_configuration.back.name
 

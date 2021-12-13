@@ -34,35 +34,6 @@ resource "aws_route_table_association" "prod-crta-public-subnet-3" {
   route_table_id = aws_route_table.prod-public-crt.id
 }
 
-# resource "aws_elb" "web-elb" {
-#   name = "web-elb"
-#   security_groups = [
-#     aws_security_group.elb-http.id
-#   ]
-#   subnets = [
-#     aws_subnet.prod-public-subnet-1.id,
-#     aws_subnet.prod-public-subnet-2.id
-#   ]
-
-#   cross_zone_load_balancing = true
-
-#   health_check {
-#     healthy_threshold   = 2
-#     unhealthy_threshold = 2
-#     timeout             = 3
-#     interval            = 30
-#     target              = "HTTP:80/"
-#   }
-
-#   listener {
-#     lb_port           = 80
-#     lb_protocol       = "http"
-#     instance_port     = "80"
-#     instance_protocol = "http"
-#   }
-
-# }
-
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 6.0"

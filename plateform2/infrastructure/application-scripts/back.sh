@@ -1,10 +1,12 @@
 #! /bin/bash
 
 sudo apt-get update
-sudo apt-get install npm
-sudo apt-get install nodejs
+sudo apt-get install npm -y
 
-git clone git@github.com:GondorSigl2022/backend-SOAR.git
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+git clone https://github.com/GondorSigl2022/backend-SOAR.git
 
 cd backend-SOAR/backend/
 
@@ -12,4 +14,4 @@ npm install express
 
 npm install
 
-npm run build
+node index.js

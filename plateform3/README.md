@@ -3,7 +3,7 @@
 
 ## Architecture
 
-![SOAR plateforme 3](https://user-images.githubusercontent.com/35228405/146020242-da2ad5a6-5097-498a-a480-c57868dbe72c.png)
+![SOAR plateforme 3(5)](https://user-images.githubusercontent.com/35228405/146021528-6b68c1ed-fa88-423f-b1d8-56967684c9fa.png)
 
 ## Launch project
 

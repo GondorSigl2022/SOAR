@@ -4,7 +4,7 @@ resource "aws_instance" "bdd-master" {
   instance_type = "t2.micro"
 
   # VPC
-  subnet_id = aws_subnet.prod-public-subnet-3.id
+  subnet_id = aws_subnet.prod-public-subnet-2.id
 
   # Security Group
   vpc_security_group_ids = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
@@ -34,7 +34,7 @@ resource "aws_instance" "bdd-slave" {
   instance_type = "t2.micro"
 
   # VPC
-  subnet_id = aws_subnet.prod-public-subnet-3.id
+  subnet_id = aws_subnet.prod-public-subnet-1.id
 
   # Security Group
   vpc_security_group_ids = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]

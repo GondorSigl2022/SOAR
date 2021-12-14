@@ -6,6 +6,7 @@ variable "AMI" {
   type = map(string)
 
   default = {
+    # AMI Ubuntu
     us-east-2 = "ami-0fb653ca2d3203ac1"
   }
 }

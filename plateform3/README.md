@@ -1,28 +1,14 @@
 # SOAR : Plateform 3
 
-### Init terraform
 
-terraform init
+## Architecture
 
-### Format configuration
+![SOAR plateforme 3](https://user-images.githubusercontent.com/35228405/146020242-da2ad5a6-5097-498a-a480-c57868dbe72c.png)
 
-terraform fmt
+## Launch project
 
-### Validate configuration
+launch this command : bash bin/deploy.sh
 
-terraform validate
+## Destroy infrastructure
 
-### Launch terraform infrastructure
-
-terraform apply
-
-### Inspect state
-
-terraform show
-
-### Destroy infrastructure
-
-terraform destroy
-
-### Target architecture
-
+launch this command : bash bin/destroy.sh

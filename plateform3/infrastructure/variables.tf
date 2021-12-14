@@ -1,10 +1,6 @@
-variable "aws_region" {
-  default = "us-east-2"
-}
-
 variable "project_name" {
   type    = string
-  default = "plateform3"
+  default = "mk-rtla"
 }
 
 variable "deployment_number" {

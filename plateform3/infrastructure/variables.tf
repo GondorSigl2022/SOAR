@@ -1,6 +1,6 @@
 variable "project_name" {
   type    = string
-  default = "mk-rtla"
+  default = "platform-three"
 }
 
 variable "deployment_number" {

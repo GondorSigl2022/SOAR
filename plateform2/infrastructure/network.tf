@@ -29,11 +29,6 @@ resource "aws_route_table_association" "prod-crta-public-subnet-2" {
   route_table_id = aws_route_table.prod-public-crt.id
 }
 
-resource "aws_route_table_association" "prod-crta-public-subnet-3" {
-  subnet_id      = aws_subnet.prod-public-subnet-3.id
-  route_table_id = aws_route_table.prod-public-crt.id
-}
-
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 6.0"

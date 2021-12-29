@@ -30,13 +30,3 @@ resource "aws_subnet" "prod-public-subnet-2" {
     Name = "prod-public-subnet-2"
   }
 }
-resource "aws_subnet" "prod-public-subnet-3" {
-  vpc_id                  = aws_vpc.prod-vpc.id
-  cidr_block              = "10.0.3.0/24"
-  map_public_ip_on_launch = "true"
-  availability_zone       = "us-east-2c"
-
-  tags = {
-    Name = "prod-public-subnet-3"
-  }
-}

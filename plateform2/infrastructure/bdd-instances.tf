@@ -1,7 +1,6 @@
 resource "aws_instance" "bdd-master" {
 
-  # AMI dispo sur la région de PARIS => changer par une AMI  de chez nous "us-east-1/2"
-  ami           = "ami-0d1bf5b68307103c2"
+  ami           = lookup(var.AMI, var.AWS_REGION)
   instance_type = "t2.micro"
 
   # VPC
@@ -31,8 +30,7 @@ resource "aws_instance" "bdd-master" {
 
 resource "aws_instance" "bdd-slave" {
 
-  # AMI dispo sur la région de PARIS => changer par une AMI  de chez nous "us-east-1/2"
-  ami           = "ami-0d1bf5b68307103c2"
+  ami           = lookup(var.AMI, var.AWS_REGION)
   instance_type = "t2.micro"
 
   # VPC

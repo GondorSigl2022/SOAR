@@ -20,7 +20,7 @@ export const Cocktails = () => {
                 &&
                 <strong>Error: {reduxState.notes.errorMessage}</strong>
             }
-            <h1>Add note</h1>
+            <h1>Add Cocktail</h1>
             <form onSubmit={ (e) => {
                 reduxDispatch(createNote({ content: newNoteContent, name :  newNameCocktail}));
                 e.preventDefault();
@@ -30,28 +30,30 @@ export const Cocktails = () => {
                     className='form-control'
                     id='create-server-title'
                     placeholder=''
-                    value={newNoteContent}
-                    onChange={ (e) => setNewNoteContent(e.target.value) }
+                    value={newNameCocktail}
+                    onChange={ (e) => setNameCocktail(e.target.value) }
                 />
+
                 <input
                     type='text'
                     className='form-control'
                     id='create-server-title'
                     placeholder=''
-                    value={newNameCocktail}
-                    onChange={ (e) => setNameCocktail(e.target.value) }
+                    value={newNoteContent}
+                    onChange={ (e) => setNewNoteContent(e.target.value) }
                 />
+                
                 <button type='submit' disabled={newNoteContent.length < 1}>
                     Add
                 </button>                
             </form>
 
-            <h1>Your notes</h1>
+            <h1>Your Cocktails</h1>
             <p>
                 <button
                     onClick={() => reduxDispatch(fetchNotes())}
                 >
-                    Re-fetch notes from backend
+                    Re-fetch cocktails from backend
                 </button>
             </p>
             <p>
@@ -63,10 +65,9 @@ export const Cocktails = () => {
                 <div>
                     <small>{cocktail.id}</small>
                     <br/>
-                    {cocktail.name}
-                    <hr/>
+                    {"Name : " + cocktail.name}
                     <br/>
-                    {cocktail.content}
+                    {"Ingrédients : " + cocktail.content}
                     <hr/>
                 </div>
             ))}

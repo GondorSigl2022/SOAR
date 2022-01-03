@@ -59,7 +59,7 @@ resource "aws_iam_policy" "dynamodb_default" {
                 "dynamodb:Scan"
             ],
             "Resource": [
-                "${aws_dynamodb_table.notes.arn}"
+                "${aws_dynamodb_table.cocktails.arn}"
             ]
         }
     ]

@@ -11,7 +11,6 @@
 To deploy the two infrastructure you will need :
 * Terraform CLI installed
 * AWS CLI installed
-* An nvm version to execute applications front and back
 * A bash version to execute shell scripts
 
 ## To know

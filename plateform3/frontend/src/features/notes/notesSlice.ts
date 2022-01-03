@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export interface Note {
+export interface Cocktail {
     readonly id: string,
     readonly content: string
+    readonly name: string
 }
 
 export interface NotesState {
-    readonly notes: Note[],
+    readonly notes: Cocktail[],
     readonly errorMessage: null | string
 }
 
@@ -15,21 +16,21 @@ const initialState: NotesState = {
     errorMessage: null
 };
 
-export const createNote = createAsyncThunk<Note, { readonly content: string }, { rejectValue: { readonly errorMessage: string, readonly note: Note } }>(
+export const createNote = createAsyncThunk<Cocktail, { readonly content: string, readonly name: string}, { rejectValue: { readonly errorMessage: string, readonly cocktail: Cocktail } }>(
     'notes/create',
 
     async (arg, thunkAPI) => {
-        const note: Note = { id: Math.random().toString(), content: arg.content };
+        const cocktail: Cocktail = { id: Math.random().toString(), name: arg.name, content: arg.content };
         return await fetch(
-            '/api/notes/',
+            '/api/cocktails/',
             {
                 method: 'POST',
-                body: JSON.stringify(note)
+                body: JSON.stringify(cocktail)
             })
 
             .then(response => {
                 if (response.status === 201) {
-                    return note;
+                    return cocktail;
                 } else {
                     throw new Error(`Unexpected response from server (code ${response.status}).`);
                 }
@@ -37,17 +38,17 @@ export const createNote = createAsyncThunk<Note, { readonly content: string }, {
 
             .catch(function (error) {
                 console.error(error);
-                return thunkAPI.rejectWithValue({ errorMessage: error.message, note });
+                return thunkAPI.rejectWithValue({ errorMessage: error.message, cocktail});
             });
     }
 );
 
 
-export const fetchNotes = createAsyncThunk<Note[], void, { rejectValue: string }>(
-    'notes/fetch',
+export const fetchNotes = createAsyncThunk<Cocktail[], void, { rejectValue: string }>(
+    'cocktails/fetch',
     async (arg, thunkAPI) => {
         return await fetch(
-            '/api/notes/',
+            '/api/cocktails/',
             {
                 method: 'GET'
             })
@@ -68,7 +69,7 @@ export const fetchNotes = createAsyncThunk<Note[], void, { rejectValue: string }
 );
 
 export const notesSlice = createSlice({
-    name: 'notes',
+    name: 'cocktails',
     initialState,
     reducers: {
         reset: () => initialState
@@ -83,7 +84,7 @@ export const notesSlice = createSlice({
         builder
             .addCase(createNote.rejected, (state, action) => {
                 if (action.payload !== undefined) {
-                    state.notes.unshift(action.payload.note);
+                    state.notes.unshift(action.payload.cocktail);
                     state.errorMessage = action.payload.errorMessage;
                 }
             });

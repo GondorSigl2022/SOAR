@@ -6,10 +6,10 @@ const AWS = require('aws-sdk');
 AWS.config.update({ region: 'us-east-1' });
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-const handleGetNotesRequest = async () => {
+const handleGetCocktailRequest = async () => {
     const queryResult: ScanOutput = await new Promise((resolve, reject) => {
         docClient.scan(
-            { TableName: 'notes', Limit: 100 },
+            { TableName: 'cocktails', Limit: 100 },
             (err: AWSError, data: ScanOutput) => {
                 if (err) {
                     console.error(err);
@@ -29,7 +29,7 @@ const handleGetNotesRequest = async () => {
     };
 };
 
-const handleCreateNoteRequest = async (event: APIGatewayProxyEvent) => {
+const handleCreateCocktailRequest = async (event: APIGatewayProxyEvent) => {
     let requestBodyJson = '';
     {
         if (event.isBase64Encoded) {
@@ -39,15 +39,16 @@ const handleCreateNoteRequest = async (event: APIGatewayProxyEvent) => {
         }
     }
 
-    const requestBodyObject = JSON.parse(requestBodyJson) as { id: string, content: string };
+    const requestBodyObject = JSON.parse(requestBodyJson) as { id: string, name : string, content: string };
 
     await new Promise((resolve, reject) => {
         docClient.put(
             {
-                TableName: 'notes',
+                TableName: 'cocktails',
                 Item: {
                     id: requestBodyObject.id,
-                    content: requestBodyObject.content
+                    name: requestBodyObject.name,
+                    ingredients: requestBodyObject.content
                 }
             },
             (err: AWSError) => {
@@ -74,12 +75,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
     const routeKey = `${event.httpMethod} ${event.pathParameters?.proxy}`;
 
-    if (routeKey === 'GET notes/') {
-        return handleGetNotesRequest();
+    if (routeKey === 'GET cocktails/') {
+        return handleGetCocktailRequest();
     }
 
-    if (routeKey === 'POST notes/') {
-        return handleCreateNoteRequest(event);
+    if (routeKey === 'POST cocktails/') {
+        return handleCreateCocktailRequest(event);
     }
 
     return {

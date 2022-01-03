@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { createNote, fetchNotes, notesSlice } from './notesSlice';
 
-export const Notes = () => {
+export const Cocktails = () => {
     const reduxState = useAppSelector(state => state);
     const reduxDispatch = useAppDispatch();
     const [newNoteContent, setNewNoteContent] = useState('');
+    const [newNameCocktail, setNameCocktail] = useState('');
 
     useEffect(() => {
         reduxDispatch(fetchNotes());
@@ -21,7 +22,7 @@ export const Notes = () => {
             }
             <h1>Add note</h1>
             <form onSubmit={ (e) => {
-                reduxDispatch(createNote({ content: newNoteContent }));
+                reduxDispatch(createNote({ content: newNoteContent, name :  newNameCocktail}));
                 e.preventDefault();
             }}>
                 <input
@@ -32,9 +33,17 @@ export const Notes = () => {
                     value={newNoteContent}
                     onChange={ (e) => setNewNoteContent(e.target.value) }
                 />
+                <input
+                    type='text'
+                    className='form-control'
+                    id='create-server-title'
+                    placeholder=''
+                    value={newNameCocktail}
+                    onChange={ (e) => setNameCocktail(e.target.value) }
+                />
                 <button type='submit' disabled={newNoteContent.length < 1}>
                     Add
-                </button>
+                </button>                
             </form>
 
             <h1>Your notes</h1>
@@ -50,11 +59,14 @@ export const Notes = () => {
                     Reset
                 </button>
             </p>
-            {reduxState.notes.notes.map(note => (
+            {reduxState.notes.notes.map(cocktail => (
                 <div>
-                    <small>{note.id}</small>
+                    <small>{cocktail.id}</small>
                     <br/>
-                    {note.content}
+                    {cocktail.name}
+                    <hr/>
+                    <br/>
+                    {cocktail.content}
                     <hr/>
                 </div>
             ))}

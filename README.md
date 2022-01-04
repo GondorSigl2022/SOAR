@@ -11,11 +11,5 @@
 To deploy the two infrastructure you will need :
 * Terraform CLI installed
 * AWS CLI installed
+* A nvm version to execute application in plateform 3
 * A bash version to execute shell scripts
-
-## To know
-
-plateform 2 :
-
-plateform 3 :
-* The deployment script will install nvm if you don't have it

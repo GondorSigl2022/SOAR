@@ -12,6 +12,9 @@ let db : any = null;
 
 //Connect to mongodb
 mongoClient.connect(url, function(err : any, client : any) {
+    if (err) {
+        throw err;
+      }
     try {
         db = client.db(dbName);
         console.log("Connected successfully to server");

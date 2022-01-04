@@ -6,7 +6,7 @@ const app = express();
 const port = 80;
 
 //MongoDB
-const url = "mongodb://10.0.1.43:27017/cocktails/?replicaSet=rs0"
+const url = "mongodb://10.0.1.43:27017/?replicaSet=rs0"
 const dbName = 'cocktails';
 let db : any = null;
 

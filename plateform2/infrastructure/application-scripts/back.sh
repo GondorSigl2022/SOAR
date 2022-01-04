@@ -1,13 +1,13 @@
 #!/bin/bash
 
-sudo apt-get update -y
+sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get update
 
 sudo apt-get install nodejs npm -y
 
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
-export PATH=$PATH
+PATH=$PATH
 
 git clone https://github.com/GondorSigl2022/SOAR.git
 

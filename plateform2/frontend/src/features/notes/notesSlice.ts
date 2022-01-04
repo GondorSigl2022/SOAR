@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+const backend = process.env.REACT_APP_BACKEND_URI
+
 export interface Cocktail {
     readonly id: string,
     readonly content: string
@@ -22,7 +24,7 @@ export const createNote = createAsyncThunk<Cocktail, { readonly content: string,
     async (arg, thunkAPI) => {
         const cocktail: Cocktail = { id: Math.random().toString(), name: arg.name, content: arg.content };
         return await fetch(
-            '/api/cocktails/',
+            backend+'/api/cocktails/',
             {
                 method: 'POST',
                 body: JSON.stringify(cocktail)
@@ -48,7 +50,7 @@ export const fetchNotes = createAsyncThunk<Cocktail[], void, { rejectValue: stri
     'cocktails/fetch',
     async (arg, thunkAPI) => {
         return await fetch(
-            '/api/cocktails/',
+            backend+'/api/cocktails/',
             {
                 method: 'GET'
             })

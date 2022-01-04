@@ -13,10 +13,12 @@ let db : any = null;
 //Connect to mongodb
 mongoClient.connect(url, function(err : any, client : any) {
     console.log("Connected successfully to server");
-    if (client.db != undefined)
+    try {
         db = client.db(dbName);
-    else
-        console.error;
+    }
+    catch(err: any) {
+        console.log(err);
+    }
 });
 
 app.get('/api/cocktails/', async (req : Error, res : any) => {

@@ -10,7 +10,6 @@ wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add 
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
 sudo apt-get update -y
 sudo apt-get install -y mongodb-org
-
 sudo apt-get install -y git
 
 sudo systemctl start mongod
@@ -62,23 +61,10 @@ replication:
 
 #snmp:' > /etc/mongod.conf
 
-git clone https://github.com/GondorSigl2022/mongo-replica-init.git
-
 sudo systemctl restart mongod
 
-sleep 10
+sleep 100
+
+git clone https://github.com/GondorSigl2022/mongo-replica-init.git
 
 sudo bash -c "mongo < mongo-replica-init/init.js > output.txt"
-
-# echo '
-# init = {
-#     _id: 'rs0',
-#     members: [
-#         { _id: 0, host: 'db-manager:27017', priority: 1},
-#         { _id: 1, host: 'db-node1:27017', priority: 0.5},
-#         { _id: 2, host: 'db-node2:27017', priority: 0.5}
-#     ]
-# }
-# rs.initiate(init)' > rsinitiate
-
-# sudo bash -c "mongo < rsinitiate > output.txt"

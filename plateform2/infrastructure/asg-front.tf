@@ -25,10 +25,10 @@ resource "aws_autoscaling_group" "front" {
 
   min_size         = 2
   desired_capacity = 2
-  max_size         = 4
+  max_size         = 2
 
   health_check_type = "ELB"
-  target_group_arns = module.alb.target_group_arns
+  target_group_arns = module.alb-front.target_group_arns
 
   launch_configuration = aws_launch_configuration.front.name
 

@@ -29,11 +29,45 @@ resource "aws_route_table_association" "prod-crta-public-subnet-2" {
   route_table_id = aws_route_table.prod-public-crt.id
 }
 
-module "alb" {
+module "alb-front" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 6.0"
 
-  name = "web-elb"
+  name = "elb-front"
+
+  load_balancer_type = "application"
+
+  vpc_id = aws_vpc.prod-vpc.id
+  subnets = [
+    aws_subnet.prod-public-subnet-1.id,
+    aws_subnet.prod-public-subnet-2.id
+  ]
+
+  security_groups = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
+
+  target_groups = [
+    {
+      name_prefix      = "pref-"
+      backend_protocol = "HTTP"
+      backend_port     = 80
+      target_type      = "instance"
+    }
+  ]
+
+  http_tcp_listeners = [
+    {
+      port               = 80
+      protocol           = "HTTP"
+      target_group_index = 0
+    }
+  ]
+}
+
+module "alb-back" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 6.0"
+
+  name = "elb-back"
 
   load_balancer_type = "application"
 

@@ -2,7 +2,7 @@
   "name": "react-typescript-lambda-app-backend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "mongodb://10.0.1.43:27017,10.0.1.54:27017,10.0.2.55:27017/?replicaSet=rs0",
+  "proxy": "mongodb://10.0.1.43:27017,10.0.1.54:27017,10.0.2.55:27017/",
   "dependencies": {
     "@types/node": "^14.14.41",
     "express": "^4.17.2",

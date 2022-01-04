@@ -6,7 +6,7 @@ const app = express();
 const port = 80;
 
 //MongoDB
-const url = "mongodb://10.0.1.43:27017,10.0.1.54:27017,10.0.2.55:27017/cocktails/?replicaSet=rs0"
+const url = "mongodb://10.0.1.43:27017/cocktails/?replicaSet=rs0"
 const dbName = 'cocktails';
 let db : any = null;
 
@@ -25,9 +25,8 @@ mongoClient.connect(url, function(err : any, client : any) {
 });
 
 app.get('/api/cocktails/', async (req : Error, res : any) => {
-    // const cocktails =  await db.collection('cocktails').find().toArray();
-    // res.status(200).send(JSON.stringify(cocktails));
-    res.status(200).send("hello world");
+    const cocktails =  await db.collection('cocktails').find().toArray();
+    res.status(200).send(JSON.stringify(cocktails));
 })
 
 app.post('/api/cocktails/', (req : any, res : any) => {

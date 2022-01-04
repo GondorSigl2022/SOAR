@@ -11,6 +11,10 @@ git clone https://github.com/GondorSigl2022/SOAR.git
 
 cd SOAR/plateform2/frontend
 
+echo "REACT_APP_BACKEND_URI=${REACT_APP_BACKEND_URI}" > .env
+
+export REACT_APP_BACKEND_URI=${REACT_APP_BACKEND_URI}
+
 nvm install
 nvm use
 npm i --no-save

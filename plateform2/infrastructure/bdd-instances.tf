@@ -1,13 +1,13 @@
 resource "aws_instance" "db-manager" {
 
   ami           = lookup(var.AMI, var.AWS_REGION)
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
   # VPC
   subnet_id = aws_subnet.prod-public-subnet-1.id
 
   # Security Group
-  vpc_security_group_ids = [aws_default_security_group.default.id, aws_security_group.ssh-allowed.id]
+  vpc_security_group_ids = [aws_default_security_group.default.id]
 
   # Specify private ip
   private_ip = "10.0.1.43"
@@ -31,13 +31,13 @@ resource "aws_instance" "db-manager" {
 resource "aws_instance" "db-node1" {
 
   ami           = lookup(var.AMI, var.AWS_REGION)
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
   # VPC
   subnet_id = aws_subnet.prod-public-subnet-1.id
 
   # Security Group
-  vpc_security_group_ids = [aws_default_security_group.default.id, aws_security_group.ssh-allowed.id]
+  vpc_security_group_ids = [aws_default_security_group.default.id]
 
   # Specify private ip
   private_ip = "10.0.1.54"
@@ -61,13 +61,13 @@ resource "aws_instance" "db-node1" {
 resource "aws_instance" "db-node2" {
 
   ami           = lookup(var.AMI, var.AWS_REGION)
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
   # VPC
   subnet_id = aws_subnet.prod-public-subnet-2.id
 
   # Security Group
-  vpc_security_group_ids = [aws_default_security_group.default.id, aws_security_group.ssh-allowed.id]
+  vpc_security_group_ids = [aws_default_security_group.default.id]
 
   # Specify private ip
   private_ip = "10.0.2.55"

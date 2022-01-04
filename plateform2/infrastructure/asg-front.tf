@@ -2,13 +2,13 @@ resource "aws_launch_configuration" "front" {
   name_prefix = "front-"
 
   image_id      = lookup(var.AMI, var.AWS_REGION)
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
-  security_groups             = [aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
+  security_groups             = [aws_default_security_group.default.id, aws_security_group.http-allowed.id, aws_security_group.ssh-allowed.id]
   associate_public_ip_address = true
   key_name                    = aws_key_pair.webserver-key.key_name
 
-  user_data = file("application-scripts/front.sh")
+  user_data = data.template_file.init.rendered
 
   lifecycle {
     create_before_destroy = true

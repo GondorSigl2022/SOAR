@@ -24,7 +24,7 @@ export const createNote = createAsyncThunk<Cocktail, { readonly content: string,
     async (arg, thunkAPI) => {
         const cocktail: Cocktail = { id: Math.random().toString(), name: arg.name, content: arg.content };
         return await fetch(
-            backend+'/api/cocktails/',
+            'http://'+backend+'/api/cocktails/',
             {
                 method: 'POST',
                 body: JSON.stringify(cocktail)
@@ -50,7 +50,7 @@ export const fetchNotes = createAsyncThunk<Cocktail[], void, { rejectValue: stri
     'cocktails/fetch',
     async (arg, thunkAPI) => {
         return await fetch(
-            backend+'/api/cocktails/',
+            'http://'+backend+'/api/cocktails/',
             {
                 method: 'GET'
             })

@@ -11,19 +11,20 @@ const dbName = 'cocktails';
 let db : any = null;
 
 //Connect to mongodb
-mongoClient.connect(url, function(err : any, client : any) {
-    console.log("Connected successfully to server");
-    try {
-        db = client.db(dbName);
-    }
-    catch(err: any) {
-        console.log(err);
-    }
-});
+// mongoClient.connect(url, function(err : any, client : any) {
+//     console.log("Connected successfully to server");
+//     try {
+//         db = client.db(dbName);
+//     }
+//     catch(err: any) {
+//         console.log(err);
+//     }
+// });
 
 app.get('/api/cocktails/', async (req : Error, res : any) => {
-    const cocktails =  await db.collection('cocktails').find().toArray();
-    res.status(200).send(JSON.stringify(cocktails));
+    // const cocktails =  await db.collection('cocktails').find().toArray();
+    // res.status(200).send(JSON.stringify(cocktails));
+    res.status(200).send("hello world");
 })
 
 app.post('/api/cocktails/', (req : any, res : any) => {

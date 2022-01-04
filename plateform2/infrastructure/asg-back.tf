@@ -8,7 +8,7 @@ resource "aws_launch_configuration" "back" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.webserver-key.key_name
 
-  user_data = file("application-scripts/back.sh")
+  user_data = file("../backend/back.sh")
 
   lifecycle {
     create_before_destroy = true

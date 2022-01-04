@@ -6,9 +6,9 @@ const app = express();
 const port = 80;
 
 //MongoDB
-const url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
+const url = "mongodb://db-manager:27017,db-node1:27017,db-node2:27017/cocktails/?replicaSet=rs0"
 const dbName = 'cocktails';
-let db : any;
+let db : any = null;
 
 //Connect to mongodb
 mongoClient.connect(url, function(err : any, client : any) {

@@ -11,15 +11,15 @@ const dbName = 'cocktails';
 let db : any = null;
 
 //Connect to mongodb
-// mongoClient.connect(url, function(err : any, client : any) {
-//     console.log("Connected successfully to server");
-//     try {
-//         db = client.db(dbName);
-//     }
-//     catch(err: any) {
-//         console.log(err);
-//     }
-// });
+mongoClient.connect(url, function(err : any, client : any) {
+    try {
+        db = client.db(dbName);
+        console.log("Connected successfully to server");
+    }
+    catch(err: any) {
+        console.log(err);
+    }
+});
 
 app.get('/api/cocktails/', async (req : Error, res : any) => {
     // const cocktails =  await db.collection('cocktails').find().toArray();

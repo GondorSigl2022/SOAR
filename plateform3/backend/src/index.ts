@@ -39,7 +39,7 @@ const handleCreateCocktailRequest = async (event: APIGatewayProxyEvent) => {
         }
     }
 
-    const requestBodyObject = JSON.parse(requestBodyJson) as { id: string, name : string, content: string };
+    const requestBodyObject = JSON.parse(requestBodyJson) as { id: string, name : string, ingredients: string };
 
     await new Promise((resolve, reject) => {
         docClient.put(
@@ -48,7 +48,7 @@ const handleCreateCocktailRequest = async (event: APIGatewayProxyEvent) => {
                 Item: {
                     id: requestBodyObject.id,
                     name: requestBodyObject.name,
-                    ingredients: requestBodyObject.content
+                    ingredients: requestBodyObject.ingredients
                 }
             },
             (err: AWSError) => {

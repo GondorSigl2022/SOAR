@@ -2,13 +2,12 @@
 
 ## Project architecture
 
-* applications : contains our application (maybe deleted at the end of project)
-* plateform2 : contains the plateform2 infrastructure and applications deployment
-* plateform3 : contains the plateform3 infrastructure and applications deployment
+* plateform2.zip : contains the plateform2 infrastructure and applications deployment
+* plateform3.zip : contains the plateform3 infrastructure and applications deployment
 
 ## Pre requisite
 
-To deploy the two infrastructure you will need :
+To deploy the two infrastructures you will need :
 * Terraform CLI installed
 * AWS CLI installed
 * A nvm version to execute application in plateform 3

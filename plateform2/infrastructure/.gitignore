@@ -1,7 +1,7 @@
 .terraform
-
 .terraform.*
-
+terraform.tfvars
+terraform.tfstate
 terraform.tfstate.backup
 
-webserver-key.pem
+webserver-key.*

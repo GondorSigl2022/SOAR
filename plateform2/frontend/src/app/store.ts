@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import notesReducer from '../features/notes/notesSlice';
+import cocktailsReducer from '../features/cocktails/cocktailSlice';
 
 export const store = configureStore({
     reducer: {
-        notes: notesReducer,
+        cocktails: cocktailsReducer,
     },
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+

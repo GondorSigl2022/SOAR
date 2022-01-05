@@ -2,25 +2,25 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface Cocktail {
     readonly id: string,
-    readonly content: string
+    readonly ingredients: string
     readonly name: string
 }
 
-export interface NotesState {
-    readonly notes: Cocktail[],
+export interface CocktailsState {
+    readonly cocktails: Cocktail[],
     readonly errorMessage: null | string
 }
 
-const initialState: NotesState = {
-    notes: [],
+const initialState: CocktailsState = {
+    cocktails: [],
     errorMessage: null
 };
 
-export const createNote = createAsyncThunk<Cocktail, { readonly content: string, readonly name: string}, { rejectValue: { readonly errorMessage: string, readonly cocktail: Cocktail } }>(
-    'notes/create',
+export const createCocktail = createAsyncThunk<Cocktail, { readonly ingredients: string, readonly name: string}, { rejectValue: { readonly errorMessage: string, readonly cocktail: Cocktail } }>(
+    'cocktails/create',
 
     async (arg, thunkAPI) => {
-        const cocktail: Cocktail = { id: Math.random().toString(), name: arg.name, content: arg.content };
+        const cocktail: Cocktail = { id: Math.random().toString(), name: arg.name, ingredients: arg.ingredients };
         return await fetch(
             '/api/cocktails/',
             {
@@ -44,7 +44,7 @@ export const createNote = createAsyncThunk<Cocktail, { readonly content: string,
 );
 
 
-export const fetchNotes = createAsyncThunk<Cocktail[], void, { rejectValue: string }>(
+export const fetchCocktails = createAsyncThunk<Cocktail[], void, { rejectValue: string }>(
     'cocktails/fetch',
     async (arg, thunkAPI) => {
         return await fetch(
@@ -68,7 +68,7 @@ export const fetchNotes = createAsyncThunk<Cocktail[], void, { rejectValue: stri
     }
 );
 
-export const notesSlice = createSlice({
+export const cocktailsSlice = createSlice({
     name: 'cocktails',
     initialState,
     reducers: {
@@ -76,30 +76,30 @@ export const notesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(createNote.fulfilled, (state, action) => {
-                state.notes.unshift(action.payload);
+            .addCase(createCocktail.fulfilled, (state, action) => {
+                state.cocktails.unshift(action.payload);
                 state.errorMessage = null;
             });
 
         builder
-            .addCase(createNote.rejected, (state, action) => {
+            .addCase(createCocktail.rejected, (state, action) => {
                 if (action.payload !== undefined) {
-                    state.notes.unshift(action.payload.cocktail);
+                    state.cocktails.unshift(action.payload.cocktail);
                     state.errorMessage = action.payload.errorMessage;
                 }
             });
 
 
         builder
-            .addCase(fetchNotes.fulfilled, (state, action) => {
-                state.notes = action.payload;
+            .addCase(fetchCocktails.fulfilled, (state, action) => {
+                state.cocktails = action.payload;
             });
 
         builder
-            .addCase(fetchNotes.rejected, (state, action) => {
+            .addCase(fetchCocktails.rejected, (state, action) => {
                 state.errorMessage = action.payload ?? null;
             });
     },
 });
 
-export default notesSlice.reducer;
+export default cocktailsSlice.reducer;
